@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include "movement.h"
 
 const int SCREEN_WIDTH = 2000;
 const int SCREEN_HEIGHT = 1500;
@@ -9,7 +10,7 @@ SDL_Texture *loadTexture(const char *path, SDL_Renderer *renderer) {
 
   SDL_Surface *tempSurface = IMG_Load(path);
   if (!tempSurface) {
-    std::cerr << "Failed to load BMP image! SDL_Error: " << SDL_GetError()
+    std::cerr << "Failed to load image! SDL_Error: " << SDL_GetError()
               << std::endl;
     return nullptr;
   }
@@ -72,7 +73,10 @@ int main(int argc, char *argv[]) {
         quit = true;
       }
     }
-
+  
+    // Call the new function for movement
+    handleMovement(event, carProp, 10);
+    
     // Clear screen
     SDL_RenderClear(renderer);
 
